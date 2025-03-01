@@ -74,10 +74,13 @@ enum collision_state Snake_Update(const enum movement_direction movementDirectio
             break;
     }
 
+    if (newHeadIndex == lastFoodGridIndex) {
+        snake[newHeadIndex] = snake[headIndex] + 1;
+        return CS_FOOD;
+    }
+
     snake[newHeadIndex] = snake[headIndex] + 1;
     snake[tailIndex] = 0;
-
-    if (newHeadIndex == lastFoodGridIndex) return CS_FOOD;
 
     return CS_NONE;
 }
