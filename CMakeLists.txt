@@ -19,7 +19,7 @@ if (WIN32)
 
     include(FetchContent)
 
-    set(SDL2_DIR "${CMAKE_SOURCE_DIR}/dependencies/SDL/cmake")
+    set(SDL3_DIR "${CMAKE_SOURCE_DIR}/dependencies/SDL/cmake")
 
     # Set the download URL for SDL library.
     set(SDL_DOWNLOAD_URL "https://github.com/libsdl-org/SDL/releases/download/release-3.2.4/SDL3-devel-3.2.4-mingw.zip")
@@ -33,7 +33,7 @@ if (WIN32)
     FetchContent_Declare(SDL URL ${SDL_DOWNLOAD_URL} SOURCE_DIR ${SDL_EXTRACTION_DIRECTORY} DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
     FetchContent_MakeAvailable(SDL)
 
-    find_package(SDL2 REQUIRED)
+    find_package(SDL3 REQUIRED)
 endif ()
 
 # Specific to 'MinGW', enable all warnings and treat them as errors.
