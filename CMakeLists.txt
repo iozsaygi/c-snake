@@ -37,7 +37,10 @@ if (NOT SDL3_FOUND)
 endif ()
 
 # Create the executable.
-add_executable(${PROJECT_NAME} src/main.c)
+add_executable(${PROJECT_NAME} src/main.c src/game.c)
+
+# Include self header files.
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # Add SDL3 include directories.
 target_include_directories(${PROJECT_NAME} PRIVATE ${SDL3_INCLUDE_DIRS})
