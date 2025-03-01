@@ -57,7 +57,7 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
     uint32_t lastSimulationTime = SDL_GetTicks();
     uint32_t currentTime = 0;
     uint32_t frameStart = 0;
-    const uint32_t simulationRate = 250;
+    const uint32_t simulationRate = 100;
 
     printf("[GAME] Entering the update loop\n");
 
