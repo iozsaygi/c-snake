@@ -5,7 +5,7 @@ int main(int argc, char* argv[]) {
         640, // width
         480, // height
         60, // targetFrameRate
-        "CSnake" // title
+        "Classic Snake" // title
     };
 
     struct render_context rndCtx = {
