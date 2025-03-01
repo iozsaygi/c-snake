@@ -67,6 +67,17 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
                 case SDL_EVENT_QUIT:
                     isActive = 0;
                     break;
+                case SDL_EVENT_KEY_DOWN:
+                    if (event.key.key == SDLK_W) {
+                        snakeDirection = 2;
+                    } else if (event.key.key == SDLK_A) {
+                        snakeDirection = -1;
+                    } else if (event.key.key == SDLK_S) {
+                        snakeDirection = -2;
+                    } else if (event.key.key == SDLK_D) {
+                        snakeDirection = 1;
+                    }
+                    break;
                 default:;
             }
         }
