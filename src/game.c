@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include "grid.h"
+#include "snake.h"
 
 int Game_TryCreate(const struct window_context* wndCtx, struct render_context* rndCtx) {
     assert(wndCtx != NULL);
@@ -28,8 +29,13 @@ int Game_TryCreate(const struct window_context* wndCtx, struct render_context* r
 }
 
 void Game_Update(const struct window_context* wndCtx, const struct render_context* rndCtx) {
+    // Create grid.
     struct node grid[GRID_WIDTH * GRID_HEIGHT];
     Grid_Initialize(grid);
+
+    // Create snake body.
+    int snake[GRID_WIDTH * GRID_HEIGHT];
+    Snake_Initialize(snake);
 
     int isActive = 1;
     SDL_Event event;
@@ -54,6 +60,7 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
         SDL_RenderClear(rndCtx->renderer);
 
         Grid_Render(grid, rndCtx);
+        Snake_Render(rndCtx, grid, snake);
 
         SDL_RenderPresent(rndCtx->renderer);
 
