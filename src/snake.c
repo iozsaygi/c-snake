@@ -14,7 +14,7 @@ void Snake_Initialize(int* snake) {
     snake[262] = 1;
 }
 
-void Snake_Update(enum movement_direction movementDirection, int* snake) {
+void Snake_Update(const enum movement_direction movementDirection, int* snake) {
     // index + GRID_WIDTH = Downward node.
     // index + 1 = Right node.
     // index - GRID_WIDTH = Upper node.
