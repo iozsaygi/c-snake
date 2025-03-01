@@ -2,6 +2,8 @@
 #include <SDL3/SDL.h>
 #include <assert.h>
 #include <game.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void Grid_Initialize(struct node* grid) {
     assert(grid != NULL);
@@ -11,6 +13,7 @@ void Grid_Initialize(struct node* grid) {
             const int index = j * GRID_WIDTH + i;
             grid[index].x = i * NODE_SIZE;
             grid[index].y = j * NODE_SIZE;
+            grid[index].state = 0;
         }
     }
 }
@@ -27,6 +30,18 @@ void Grid_Render(const struct node* grid, const struct render_context* rndCtx) {
             const int x = grid[index].x;
             const int y = grid[index].y;
 
+            // Render food.
+            if (grid[index].state == -1) {
+                SDL_FRect rect;
+                rect.w = NODE_SIZE;
+                rect.h = NODE_SIZE;
+                rect.x = grid[index].x;
+                rect.y = grid[index].y;
+                SDL_SetRenderDrawColor(rndCtx->renderer, 0, 255, 0, 255);
+                SDL_RenderFillRect(rndCtx->renderer, &rect);
+                SDL_SetRenderDrawColor(rndCtx->renderer, 40, 40, 40, 255);
+            }
+
             // Horizontal lines.
             SDL_RenderLine(rndCtx->renderer, x, y, x + NODE_SIZE, y);
             SDL_RenderLine(rndCtx->renderer, x, y + NODE_SIZE, x + NODE_SIZE, y + NODE_SIZE);
@@ -36,4 +51,33 @@ void Grid_Render(const struct node* grid, const struct render_context* rndCtx) {
             SDL_RenderLine(rndCtx->renderer, x + NODE_SIZE, y, x + NODE_SIZE, y + NODE_SIZE);
         }
     }
+}
+
+struct node* Grid_FindAvailableNodes(const struct node* grid, const int* snake, int* length) {
+    struct node* result = malloc(sizeof(struct node) * GRID_WIDTH * GRID_HEIGHT);
+    if (result == NULL) {
+        printf("Couldn't allocate memory to find available nodes");
+        *length = 0;
+        return NULL;
+    }
+
+    int internalLength = 0;
+    for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; i++) {
+        if (snake[i] == 0) {
+            result[internalLength] = grid[i];
+            internalLength++;
+        }
+    }
+
+    struct node* strictBuffer = (struct node*) realloc(result, internalLength * sizeof(int));
+    if (strictBuffer == NULL) {
+        *length = 0;
+        free(result);
+        return NULL;
+    }
+
+    free(result);
+    *length = internalLength;
+
+    return strictBuffer;
 }

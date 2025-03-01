@@ -1,6 +1,7 @@
 #include "game.h"
 #include <assert.h>
 #include <stdio.h>
+#include "food.h"
 #include "grid.h"
 #include "snake.h"
 
@@ -43,8 +44,11 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
 
     // Initialize snake movement direction.
     enum movement_direction movementDirection = MD_RIGHT;
-
     printf("[GAME] Initialized snake data\n");
+
+    // Initialize the food.
+    Food_Place(grid, snake);
+    printf("[GAME] Initialized food data\n");
 
     int isActive = 1;
     SDL_Event event;
