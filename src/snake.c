@@ -9,24 +9,40 @@ void Snake_Initialize(int* snake) {
         snake[i] = 0;
     }
 
-    snake[270] = 1;
-    snake[271] = 1;
-    snake[272] = 1;
+    snake[260] = 1;
+    snake[261] = 1;
+    snake[262] = 1;
 }
 
 void Snake_Update(const int direction, int* snake) {
+    // index + GRID_WIDTH = Downward node.
+    // index + 1 = Right node.
+    // index - GRID_WIDTH = Upper node.
+    // index - 1 = Left node.
+
     // Find the head and tail.
     int headIndex = 0;
     int tailIndex = 0;
 
     for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; i++) {
         if (snake[i] == 0) continue;
-        if (snake[i + 1] == 0) headIndex = i;
-        if (snake[i - 1] == 0) tailIndex = i;
+
+        if (direction == 1) {
+            if (snake[i + 1] == 0) headIndex = i;
+            if (snake[i - 1] == 0) tailIndex = i;
+        } else if (direction == -1) {
+            if (snake[i + 1] == 1 && snake[i - 1] == 0) tailIndex = i;
+            if (snake[i + 1] == 0) headIndex = i;
+        }
     }
 
-    snake[tailIndex] = 0;
-    snake[headIndex + 1] = 1;
+    if (direction == 1) {
+        snake[tailIndex] = 0;
+        snake[headIndex + 1] = 1;
+    } else if (direction == -1) {
+        snake[tailIndex - 1] = 1;
+        snake[headIndex] = 0;
+    }
 }
 
 void Snake_Render(const struct render_context* rndCtx, const struct node* grid, const int* snake) {
