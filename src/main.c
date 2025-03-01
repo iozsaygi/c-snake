@@ -12,7 +12,6 @@ int main(int argc, char* argv[]) {
         NULL // window
     };
 
-
     if (Game_TryCreate(&wndCtx, &rndCtx) != 0) return -1;
 
     Game_Update(&rndCtx);

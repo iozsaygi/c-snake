@@ -6,12 +6,12 @@ int Game_TryCreate(const struct window_context* wndCtx, struct render_context* r
     assert(wndCtx != NULL);
     assert(rndCtx != NULL);
 
-    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+    if (SDL_Init(SDL_INIT_VIDEO) == false) {
         printf("Could not initialize SDL, the reason was: %s\n", SDL_GetError());
         return -1;
     }
 
-    rndCtx->window = SDL_CreateWindow(wndCtx->title, wndCtx->width, wndCtx->height, SDL_WINDOWPOS_CENTERED);
+    rndCtx->window = SDL_CreateWindow(wndCtx->title, wndCtx->width, wndCtx->height, 0);
     if (rndCtx->window == NULL) {
         printf("Could not create SDL window, the reason was: %s\n", SDL_GetError());
         return -1;
