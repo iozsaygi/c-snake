@@ -57,7 +57,7 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
     uint32_t lastSimulationTime = SDL_GetTicks();
     uint32_t currentTime = 0;
     uint32_t frameStart = 0;
-    const uint32_t simulationRate = 500;
+    const uint32_t simulationRate = 250;
 
     printf("[GAME] Entering the update loop\n");
 
@@ -99,6 +99,11 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
                     lastFoodGridIndex = Food_Place(grid, snake);
                     break;
                 case CS_SELF:
+                    Food_RemoveAt(grid, lastFoodGridIndex);
+                    Snake_Initialize(snake);
+                    lastFoodGridIndex = Food_Place(grid, snake);
+                    break;
+                case CS_OOM:
                     Food_RemoveAt(grid, lastFoodGridIndex);
                     Snake_Initialize(snake);
                     lastFoodGridIndex = Food_Place(grid, snake);

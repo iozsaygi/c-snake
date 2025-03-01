@@ -83,6 +83,10 @@ enum collision_state Snake_Update(const enum movement_direction movementDirectio
         return CS_FOOD;
     }
 
+    if (newHeadIndex < 0 || newHeadIndex >= GRID_WIDTH * GRID_HEIGHT) {
+        return CS_OOM;
+    }
+
     snake[newHeadIndex] = snake[headIndex] + 1;
     snake[tailIndex] = 0;
 
