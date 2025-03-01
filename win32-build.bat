@@ -6,6 +6,7 @@
 :: mkdir build
 
 :: Navigate into the build directory.
+mkdir build
 cd build
 
 :: Run CMake build.
