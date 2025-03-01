@@ -9,9 +9,9 @@ void Snake_Initialize(int* snake) {
         snake[i] = 0;
     }
 
-    snake[260] = 1;
-    snake[261] = 2;
-    snake[262] = 3;
+    snake[265] = 1;
+    snake[266] = 2;
+    snake[267] = 3;
 }
 
 int Snake_FindHeadIndex(const int* snake) {
