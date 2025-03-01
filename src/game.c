@@ -1,6 +1,7 @@
 #include "game.h"
 #include <assert.h>
 #include <stdio.h>
+#include "grid.h"
 
 int Game_TryCreate(const struct window_context* wndCtx, struct render_context* rndCtx) {
     assert(wndCtx != NULL);
@@ -27,6 +28,9 @@ int Game_TryCreate(const struct window_context* wndCtx, struct render_context* r
 }
 
 void Game_Update(const struct window_context* wndCtx, const struct render_context* rndCtx) {
+    struct node grid[GRID_WIDTH * GRID_HEIGHT];
+    Grid_Initialize(grid);
+
     int isActive = 1;
     SDL_Event event;
 
@@ -49,7 +53,7 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
         SDL_SetRenderDrawColor(rndCtx->renderer, 0, 0, 0, 255);
         SDL_RenderClear(rndCtx->renderer);
 
-        // TODO: Render calls go here.
+        Grid_Render(grid, rndCtx);
 
         SDL_RenderPresent(rndCtx->renderer);
 
