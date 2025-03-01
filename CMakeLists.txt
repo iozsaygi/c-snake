@@ -37,7 +37,7 @@ if (NOT SDL3_FOUND)
 endif ()
 
 # Create the executable.
-add_executable(${PROJECT_NAME} main.c)
+add_executable(${PROJECT_NAME} src/main.c)
 
 # Add SDL3 include directories.
 target_include_directories(${PROJECT_NAME} PRIVATE ${SDL3_INCLUDE_DIRS})
