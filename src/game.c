@@ -99,6 +99,9 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
                     lastFoodGridIndex = Food_Place(grid, snake);
                     break;
                 case CS_SELF:
+                    Food_RemoveAt(grid, lastFoodGridIndex);
+                    Snake_Initialize(snake);
+                    lastFoodGridIndex = Food_Place(grid, snake);
                     break;
                 default:
                     break;
