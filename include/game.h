@@ -15,6 +15,7 @@ struct render_context {
 };
 
 int Game_TryCreate(const struct window_context* wndCtx, struct render_context* rndCtx);
+void Game_Update(const struct render_context* rndCtx);
 void Game_Shutdown(struct render_context* rndCtx);
 
 #endif // GAME_H

@@ -23,9 +23,32 @@ int Game_TryCreate(const struct window_context* wndCtx, struct render_context* r
         return -1;
     }
 
-    SDL_Delay(3000);
-
     return 0;
+}
+
+void Game_Update(const struct render_context* rndCtx) {
+    int isActive = 1;
+    SDL_Event event;
+
+    while (isActive == 1) {
+        // Event handling.
+        while (SDL_PollEvent(&event)) {
+            switch (event.type) {
+                case SDL_EVENT_QUIT:
+                    isActive = 0;
+                    break;
+                default:;
+            }
+        }
+
+        // Render scene.
+        SDL_SetRenderDrawColor(rndCtx->renderer, 0, 0, 0, 255);
+        SDL_RenderClear(rndCtx->renderer);
+
+        // TODO: Render calls goes here.
+
+        SDL_RenderPresent(rndCtx->renderer);
+    }
 }
 
 void Game_Shutdown(struct render_context* rndCtx) {
