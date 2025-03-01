@@ -14,7 +14,7 @@ void Snake_Initialize(int* snake) {
     snake[262] = 1;
 }
 
-void Snake_Update(const int direction, int* snake) {
+void Snake_Update(enum movement_direction movementDirection, int* snake) {
     // index + GRID_WIDTH = Downward node.
     // index + 1 = Right node.
     // index - GRID_WIDTH = Upper node.
@@ -27,19 +27,19 @@ void Snake_Update(const int direction, int* snake) {
     for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; i++) {
         if (snake[i] == 0) continue;
 
-        if (direction == 1) {
+        if (movementDirection == MD_RIGHT) {
             if (snake[i + 1] == 0) headIndex = i;
             if (snake[i - 1] == 0) tailIndex = i;
-        } else if (direction == -1) {
+        } else if (movementDirection == MD_LEFT) {
             if (snake[i + 1] == 1 && snake[i - 1] == 0) tailIndex = i;
             if (snake[i + 1] == 0) headIndex = i;
         }
     }
 
-    if (direction == 1) {
+    if (movementDirection == MD_RIGHT) {
         snake[tailIndex] = 0;
         snake[headIndex + 1] = 1;
-    } else if (direction == -1) {
+    } else if (movementDirection == MD_LEFT) {
         snake[tailIndex - 1] = 1;
         snake[headIndex] = 0;
     }

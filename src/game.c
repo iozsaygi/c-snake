@@ -41,9 +41,8 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
     int snake[GRID_WIDTH * GRID_HEIGHT];
     Snake_Initialize(snake);
 
-    // Initialize snake direction.
-    // Assuming (1 is right, -1 is left, 2 is up, and -2 is down)
-    int snakeDirection = 1;
+    // Initialize snake movement direction.
+    enum movement_direction movementDirection = MD_RIGHT;
 
     printf("[GAME] Initialized snake data\n");
 
@@ -69,13 +68,13 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
                     break;
                 case SDL_EVENT_KEY_DOWN:
                     if (event.key.key == SDLK_W) {
-                        snakeDirection = 2;
+                        movementDirection = MD_UP;
                     } else if (event.key.key == SDLK_A) {
-                        snakeDirection = -1;
+                        movementDirection = MD_LEFT;
                     } else if (event.key.key == SDLK_S) {
-                        snakeDirection = -2;
+                        movementDirection = MD_DOWN;
                     } else if (event.key.key == SDLK_D) {
-                        snakeDirection = 1;
+                        movementDirection = MD_RIGHT;
                     }
                     break;
                 default:;
@@ -87,7 +86,7 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
             printf("[GAME] Simulation tick\n");
             lastSimulationTime = currentTime;
 
-            Snake_Update(snakeDirection, snake);
+            Snake_Update(movementDirection, snake);
         }
 
         // Render scene.
