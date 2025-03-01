@@ -47,10 +47,15 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
     SDL_Event event;
 
     const uint32_t frameDelay = 1000 / wndCtx->targetFrameRate;
+    uint32_t lastSimulationTime = SDL_GetTicks();
+    uint32_t currentTime = 0;
+    uint32_t frameStart = 0;
+    const uint32_t simulationRate = 1000;
 
     printf("[GAME] Entering the update loop\n");
+
     while (isActive == 1) {
-        const uint32_t frameStart = SDL_GetTicks();
+        frameStart = SDL_GetTicks();
 
         // Event handling.
         while (SDL_PollEvent(&event)) {
@@ -62,6 +67,14 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
             }
         }
 
+        currentTime = SDL_GetTicks();
+        if (currentTime - lastSimulationTime >= simulationRate) {
+            printf("[GAME] Simulation tick\n");
+            lastSimulationTime = currentTime;
+
+            // TODO: Update game state.
+        }
+
         // Render scene.
         SDL_SetRenderDrawColor(rndCtx->renderer, 0, 0, 0, 255);
         SDL_RenderClear(rndCtx->renderer);
@@ -71,13 +84,14 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
 
         SDL_RenderPresent(rndCtx->renderer);
 
-        const uint32_t frameTime = SDL_GetTicks() - frameStart;
-        if (frameTime < frameDelay) {
-            SDL_Delay(frameDelay - frameTime);
+        const uint32_t frameDuration = SDL_GetTicks() - frameStart;
+        if (frameDuration < frameDelay) {
+            SDL_Delay(frameDelay - frameDuration);
         }
     }
     printf("[GAME] Exiting the update loop\n");
 }
+
 
 void Game_Shutdown(struct render_context* rndCtx) {
     printf("[GAME] Shutting down and clearing allocated resources\n");
