@@ -25,6 +25,8 @@ int Game_TryCreate(const struct window_context* wndCtx, struct render_context* r
         return -1;
     }
 
+    printf("[GAME] Successfully created platform layer\n");
+
     return 0;
 }
 
@@ -33,15 +35,20 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
     struct node grid[GRID_WIDTH * GRID_HEIGHT];
     Grid_Initialize(grid);
 
+    printf("[GAME] Initialized grid data\n");
+
     // Create snake body.
     int snake[GRID_WIDTH * GRID_HEIGHT];
     Snake_Initialize(snake);
+
+    printf("[GAME] Initialized snake data\n");
 
     int isActive = 1;
     SDL_Event event;
 
     const uint32_t frameDelay = 1000 / wndCtx->targetFrameRate;
 
+    printf("[GAME] Entering the update loop\n");
     while (isActive == 1) {
         const uint32_t frameStart = SDL_GetTicks();
 
@@ -69,9 +76,12 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
             SDL_Delay(frameDelay - frameTime);
         }
     }
+    printf("[GAME] Exiting the update loop\n");
 }
 
 void Game_Shutdown(struct render_context* rndCtx) {
+    printf("[GAME] Shutting down and clearing allocated resources\n");
+
     SDL_DestroyRenderer(rndCtx->renderer);
     SDL_DestroyWindow(rndCtx->window);
 
