@@ -8,6 +8,11 @@ This is also possible thanks to a
 wonderful [lecture](https://www.kosbie.net/cmu/fall-10/15-110/handouts/snake/snake.html#:~:text=In%20the%20game%20of%20Snake,as%20possible%20before%20that%20happens.)
 that is available on the internet, which explains the details of the grid-based snake game amazingly.
 
+![Gameplay footage](https://github.com/iozsaygi/c-snake/blob/main/assets/gameplay.gif?raw=true)
+
+There are still QoL improvements that I need to ship, such as a better random number generator and several other minor
+gameplay bugs.
+
 ## Building
 
 ### Windows
