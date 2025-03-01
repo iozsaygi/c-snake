@@ -41,6 +41,10 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
     int snake[GRID_WIDTH * GRID_HEIGHT];
     Snake_Initialize(snake);
 
+    // Initialize snake direction.
+    // Assuming (1 is right, -1 is left, 2 is up, and -2 is down)
+    int snakeDirection = 1;
+
     printf("[GAME] Initialized snake data\n");
 
     int isActive = 1;
@@ -72,7 +76,7 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
             printf("[GAME] Simulation tick\n");
             lastSimulationTime = currentTime;
 
-            // TODO: Update game state.
+            Snake_Update(snakeDirection, snake);
         }
 
         // Render scene.

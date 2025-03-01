@@ -14,6 +14,10 @@ void Snake_Initialize(int* snake) {
     snake[272] = 1;
 }
 
+void Snake_Update(int direction, int* snake) {
+
+}
+
 void Snake_Render(const struct render_context* rndCtx, const struct node* grid, const int* snake) {
     for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; i++) {
         if (snake[i] == 0) continue;
