@@ -10,8 +10,40 @@ void Snake_Initialize(int* snake) {
     }
 
     snake[260] = 1;
-    snake[261] = 1;
-    snake[262] = 1;
+    snake[261] = 2;
+    snake[262] = 3;
+}
+
+int Snake_FindHeadIndex(const int* snake) {
+    assert(snake != NULL);
+
+    int headIndex = -1;
+    int maximumValue = -1;
+
+    for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; i++) {
+        if (snake[i] > maximumValue) {
+            maximumValue = snake[i];
+            headIndex = i;
+        }
+    }
+
+    return headIndex;
+}
+
+int Snake_FindTailIndex(const int* snake) {
+    assert(snake != NULL);
+
+    int tailIndex = -1;
+    int minimumValue = GRID_WIDTH * GRID_HEIGHT + 1;
+
+    for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; i++) {
+        if (snake[i] < minimumValue && snake[i] > 0) {
+            minimumValue = snake[i];
+            tailIndex = i;
+        }
+    }
+
+    return tailIndex;
 }
 
 void Snake_Update(const enum movement_direction movementDirection, int* snake) {
@@ -20,29 +52,30 @@ void Snake_Update(const enum movement_direction movementDirection, int* snake) {
     // index - GRID_WIDTH = Upper node.
     // index - 1 = Left node.
 
-    // Find the head and tail.
-    int headIndex = 0;
-    int tailIndex = 0;
+    const int headIndex = Snake_FindHeadIndex(snake);
+    const int tailIndex = Snake_FindTailIndex(snake);
 
-    for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; i++) {
-        if (snake[i] == 0) continue;
+    int newHeadIndex = 0;
 
-        if (movementDirection == MD_RIGHT) {
-            if (snake[i + 1] == 0) headIndex = i;
-            if (snake[i - 1] == 0) tailIndex = i;
-        } else if (movementDirection == MD_LEFT) {
-            if (snake[i + 1] == 1 && snake[i - 1] == 0) tailIndex = i;
-            if (snake[i + 1] == 0) headIndex = i;
-        }
+    switch (movementDirection) {
+        case MD_UP:
+            newHeadIndex = headIndex - GRID_WIDTH;
+            break;
+        case MD_LEFT:
+            newHeadIndex = headIndex - 1;
+            break;
+        case MD_DOWN:
+            newHeadIndex = headIndex + GRID_WIDTH;
+            break;
+        case MD_RIGHT:
+            newHeadIndex = headIndex + 1;
+            break;
+        default:
+            break;
     }
 
-    if (movementDirection == MD_RIGHT) {
-        snake[tailIndex] = 0;
-        snake[headIndex + 1] = 1;
-    } else if (movementDirection == MD_LEFT) {
-        snake[tailIndex - 1] = 1;
-        snake[headIndex] = 0;
-    }
+    snake[newHeadIndex] = snake[headIndex] + 1;
+    snake[tailIndex] = 0;
 }
 
 void Snake_Render(const struct render_context* rndCtx, const struct node* grid, const int* snake) {
