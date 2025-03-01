@@ -47,7 +47,7 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
     printf("[GAME] Initialized snake data\n");
 
     // Initialize the food.
-    Food_Place(grid, snake);
+    int lastFoodGridIndex = Food_Place(grid, snake);
     printf("[GAME] Initialized food data\n");
 
     int isActive = 1;
@@ -87,10 +87,22 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
 
         currentTime = SDL_GetTicks();
         if (currentTime - lastSimulationTime >= simulationRate) {
-            printf("[GAME] Simulation tick\n");
+            // printf("[GAME] Simulation tick\n");
             lastSimulationTime = currentTime;
 
-            Snake_Update(movementDirection, snake);
+            const enum collision_state snakeCollisionState = Snake_Update(movementDirection, snake, lastFoodGridIndex);
+            switch (snakeCollisionState) {
+                case CS_NONE:
+                    break;
+                case CS_FOOD:
+                    Food_RemoveAt(grid, lastFoodGridIndex);
+                    lastFoodGridIndex = Food_Place(grid, snake);
+                    break;
+                case CS_SELF:
+                    break;
+                default:
+                    break;
+            }
         }
 
         // Render scene.

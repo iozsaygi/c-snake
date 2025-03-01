@@ -46,7 +46,7 @@ int Snake_FindTailIndex(const int* snake) {
     return tailIndex;
 }
 
-void Snake_Update(const enum movement_direction movementDirection, int* snake) {
+enum collision_state Snake_Update(const enum movement_direction movementDirection, int* snake, int lastFoodGridIndex) {
     // index + GRID_WIDTH = Downward node.
     // index + 1 = Right node.
     // index - GRID_WIDTH = Upper node.
@@ -76,6 +76,10 @@ void Snake_Update(const enum movement_direction movementDirection, int* snake) {
 
     snake[newHeadIndex] = snake[headIndex] + 1;
     snake[tailIndex] = 0;
+
+    if (newHeadIndex == lastFoodGridIndex) return CS_FOOD;
+
+    return CS_NONE;
 }
 
 void Snake_Render(const struct render_context* rndCtx, const struct node* grid, const int* snake) {

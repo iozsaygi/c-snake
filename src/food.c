@@ -4,12 +4,12 @@
 
 #include "grid.h"
 
-void Food_Place(struct node* grid, const int* snake) {
+int Food_Place(struct node* grid, const int* snake) {
     int length = 0;
     struct node* availableNodes = Grid_FindAvailableNodes(grid, snake, &length);
 
     // TODO: Maybe replace 'return' with a log?
-    if (availableNodes == NULL) return;
+    if (availableNodes == NULL) return 0;
 
     srand(time(NULL));
 
@@ -21,4 +21,10 @@ void Food_Place(struct node* grid, const int* snake) {
     grid[randomFoodIndex].state = -1;
 
     free(availableNodes);
+
+    return randomFoodIndex;
+}
+
+void Food_RemoveAt(struct node* grid, int index) {
+    if (index != -1) grid[index].state = 0;
 }
