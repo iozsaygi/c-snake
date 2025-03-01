@@ -26,11 +26,15 @@ int Game_TryCreate(const struct window_context* wndCtx, struct render_context* r
     return 0;
 }
 
-void Game_Update(const struct render_context* rndCtx) {
+void Game_Update(const struct window_context* wndCtx, const struct render_context* rndCtx) {
     int isActive = 1;
     SDL_Event event;
 
+    const uint32_t frameDelay = 1000 / wndCtx->targetFrameRate;
+
     while (isActive == 1) {
+        const uint32_t frameStart = SDL_GetTicks();
+
         // Event handling.
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
@@ -45,9 +49,14 @@ void Game_Update(const struct render_context* rndCtx) {
         SDL_SetRenderDrawColor(rndCtx->renderer, 0, 0, 0, 255);
         SDL_RenderClear(rndCtx->renderer);
 
-        // TODO: Render calls goes here.
+        // TODO: Render calls go here.
 
         SDL_RenderPresent(rndCtx->renderer);
+
+        const uint32_t frameTime = SDL_GetTicks() - frameStart;
+        if (frameTime < frameDelay) {
+            SDL_Delay(frameDelay - frameTime);
+        }
     }
 }
 
