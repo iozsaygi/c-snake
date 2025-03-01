@@ -102,11 +102,13 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
                     Food_RemoveAt(grid, lastFoodGridIndex);
                     Snake_Initialize(snake);
                     lastFoodGridIndex = Food_Place(grid, snake);
+                    movementDirection = MD_RIGHT;
                     break;
                 case CS_OOM:
                     Food_RemoveAt(grid, lastFoodGridIndex);
                     Snake_Initialize(snake);
                     lastFoodGridIndex = Food_Place(grid, snake);
+                    movementDirection = MD_RIGHT;
                     break;
                 default:
                     break;
