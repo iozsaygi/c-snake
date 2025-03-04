@@ -83,20 +83,6 @@ enum collision_state Snake_Update(const enum movement_direction movementDirectio
         return CS_FOOD;
     }
 
-    // Check if snake's head tries to move beyond left most column.
-    if (headIndex % GRID_WIDTH == 0) {
-        return CS_OOM;
-    }
-
-    // Check if snake's head tries to move beyond right most column.
-    if ((headIndex + 1) % GRID_WIDTH == 0) {
-        return CS_OOM;
-    }
-
-    if (newHeadIndex < 0 || newHeadIndex >= GRID_WIDTH * GRID_HEIGHT) {
-        return CS_OOM;
-    }
-
     snake[newHeadIndex] = snake[headIndex] + 1;
     snake[tailIndex] = 0;
 
