@@ -46,29 +46,28 @@ int Snake_FindTailIndex(const int* snake) {
     return tailIndex;
 }
 
-enum collision_state Snake_Update(const enum movement_direction movementDirection, int* snake, int lastFoodGridIndex) {
-    // index + GRID_WIDTH = Downward node.
-    // index + 1 = Right node.
-    // index - GRID_WIDTH = Upper node.
-    // index - 1 = Left node.
-
+enum collision_state Snake_Update(const enum movement_direction movementDirection, int* snake,
+                                  const int lastFoodGridIndex) {
     const int headIndex = Snake_FindHeadIndex(snake);
     const int tailIndex = Snake_FindTailIndex(snake);
 
-    int newHeadIndex = 0;
+    int newHeadIndex = headIndex;
 
+    // Setting new head index by considering edge wrapping.
+    // This lets us avoid the case where snake can move out of window/grid.
     switch (movementDirection) {
         case MD_UP:
-            newHeadIndex = headIndex - GRID_WIDTH;
+            newHeadIndex = headIndex < GRID_WIDTH ? headIndex + GRID_WIDTH * (GRID_HEIGHT - 1) : headIndex - GRID_WIDTH;
             break;
         case MD_LEFT:
-            newHeadIndex = headIndex - 1;
+            newHeadIndex = headIndex % GRID_WIDTH == 0 ? headIndex + (GRID_WIDTH - 1) : headIndex - 1;
             break;
         case MD_DOWN:
-            newHeadIndex = headIndex + GRID_WIDTH;
+            newHeadIndex =
+                headIndex >= GRID_WIDTH * (GRID_HEIGHT - 1) ? (headIndex % GRID_WIDTH) : headIndex + GRID_WIDTH;
             break;
         case MD_RIGHT:
-            newHeadIndex = headIndex + 1;
+            newHeadIndex = headIndex % GRID_WIDTH == GRID_WIDTH - 1 ? headIndex - (GRID_WIDTH - 1) : headIndex + 1;
             break;
         default:
             break;
