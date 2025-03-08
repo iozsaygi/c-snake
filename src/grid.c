@@ -18,6 +18,35 @@ void Grid_Initialize(struct node* grid) {
     }
 }
 
+struct node* Grid_FindAvailableNodes(const struct node* grid, const int* snake, int* length) {
+    struct node* result = malloc(sizeof(struct node) * GRID_WIDTH * GRID_HEIGHT);
+    if (result == NULL) {
+        printf("Couldn't allocate memory to find available nodes");
+        *length = 0;
+        return NULL;
+    }
+
+    int internalLength = 0;
+    for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; i++) {
+        if (snake[i] == 0) {
+            result[internalLength] = grid[i];
+            internalLength++;
+        }
+    }
+
+    struct node* strictBuffer = (struct node*) realloc(result, internalLength * sizeof(int));
+    if (strictBuffer == NULL) {
+        *length = 0;
+        free(result);
+        return NULL;
+    }
+
+    free(result);
+    *length = internalLength;
+
+    return strictBuffer;
+}
+
 void Grid_Render(const struct node* grid, const struct render_context* rndCtx) {
     assert(grid != NULL);
     assert(rndCtx != NULL);
@@ -51,33 +80,4 @@ void Grid_Render(const struct node* grid, const struct render_context* rndCtx) {
             SDL_RenderLine(rndCtx->renderer, x + NODE_SIZE, y, x + NODE_SIZE, y + NODE_SIZE);
         }
     }
-}
-
-struct node* Grid_FindAvailableNodes(const struct node* grid, const int* snake, int* length) {
-    struct node* result = malloc(sizeof(struct node) * GRID_WIDTH * GRID_HEIGHT);
-    if (result == NULL) {
-        printf("Couldn't allocate memory to find available nodes");
-        *length = 0;
-        return NULL;
-    }
-
-    int internalLength = 0;
-    for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; i++) {
-        if (snake[i] == 0) {
-            result[internalLength] = grid[i];
-            internalLength++;
-        }
-    }
-
-    struct node* strictBuffer = (struct node*) realloc(result, internalLength * sizeof(int));
-    if (strictBuffer == NULL) {
-        *length = 0;
-        free(result);
-        return NULL;
-    }
-
-    free(result);
-    *length = internalLength;
-
-    return strictBuffer;
 }

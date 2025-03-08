@@ -18,8 +18,9 @@ struct node {
 };
 
 void Grid_Initialize(struct node* grid);
-void Grid_Render(const struct node* grid, const struct render_context* rndCtx);
 
 struct node* Grid_FindAvailableNodes(const struct node* grid, const int* snake, int* length);
+
+void Grid_Render(const struct node* grid, const struct render_context* rndCtx);
 
 #endif // GRID_H
