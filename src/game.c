@@ -132,7 +132,6 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
     printf("[GAME] Exiting the update loop\n");
 }
 
-
 void Game_Shutdown(struct render_context* rndCtx) {
     printf("[GAME] Shutting down and clearing allocated resources\n");
 
