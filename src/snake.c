@@ -96,7 +96,7 @@ void Snake_Render(const struct render_context* rndCtx, const struct node* grid, 
         rect.h = NODE_SIZE;
         rect.x = grid[i].x;
         rect.y = grid[i].y;
-        SDL_SetRenderDrawColor(rndCtx->renderer, 255, 255, 255, 255);
+        SDL_SetRenderDrawColor(rndCtx->renderer, 60, 60, 60, 255);
         SDL_RenderFillRect(rndCtx->renderer, &rect);
     }
 }

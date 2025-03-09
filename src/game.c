@@ -116,7 +116,7 @@ void Game_Update(const struct window_context* wndCtx, const struct render_contex
         }
 
         // Render scene.
-        SDL_SetRenderDrawColor(rndCtx->renderer, 0, 0, 0, 255);
+        SDL_SetRenderDrawColor(rndCtx->renderer, 149, 194, 107, 255);
         SDL_RenderClear(rndCtx->renderer);
 
         Grid_Render(grid, rndCtx);

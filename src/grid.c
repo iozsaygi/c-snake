@@ -51,7 +51,7 @@ void Grid_Render(const struct node* grid, const struct render_context* rndCtx) {
     assert(grid != NULL);
     assert(rndCtx != NULL);
 
-    SDL_SetRenderDrawColor(rndCtx->renderer, 20, 20, 20, 255);
+    SDL_SetRenderDrawColor(rndCtx->renderer, 169, 204, 117, 255);
 
     for (int i = 0; i < GRID_WIDTH; i++) {
         for (int j = 0; j < GRID_HEIGHT; j++) {
@@ -66,9 +66,9 @@ void Grid_Render(const struct node* grid, const struct render_context* rndCtx) {
                 rect.h = NODE_SIZE;
                 rect.x = grid[index].x;
                 rect.y = grid[index].y;
-                SDL_SetRenderDrawColor(rndCtx->renderer, 0, 255, 0, 255);
+                SDL_SetRenderDrawColor(rndCtx->renderer, 255, 255, 255, 255);
                 SDL_RenderFillRect(rndCtx->renderer, &rect);
-                SDL_SetRenderDrawColor(rndCtx->renderer, 20, 20, 20, 255);
+                SDL_SetRenderDrawColor(rndCtx->renderer, 169, 204, 117, 255);
             }
 
             // Horizontal lines.
