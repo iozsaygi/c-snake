@@ -1,6 +1,6 @@
 # Classic Snake
 
-Grid-based snake game, which was created during a small Saturday (March 2, 2025) game development challenge within
+Grid-based snake game, which was created during a small Saturday (March 02, 2025) game development challenge within
 several hours. I used MinGW to compile this for Windows, but it should require minimal effort to port this to other
 compilers, such as MSVC.
 
@@ -8,9 +8,21 @@ This is also possible thanks to a
 wonderful [lecture](https://www.kosbie.net/cmu/fall-10/15-110/handouts/snake/snake.html#:~:text=In%20the%20game%20of%20Snake,as%20possible%20before%20that%20happens.)
 that is available on the internet, which explains the details of the grid-based snake game amazingly.
 
+## Changelog
+
+- First update on March 09, 2025. Reworked the color palette to catch a nostalgic feel and added edge wrapping for
+  enhanced gameplay.
+
+<p align="center">
+    <img alt="Gameplay footage" src="https://github.com/iozsaygi/c-snake/blob/main/assets/gameplay-first-update.gif?raw=true">
+</p>
+
+- Initial release on March 02, 2025.
+
 <p align="center">
     <img alt="Gameplay footage" src="https://github.com/iozsaygi/c-snake/blob/main/assets/gameplay.gif?raw=true">
 </p>
+
 
 There are still QoL improvements that I need to ship, such as a better random number generator and several other minor
 gameplay bugs.
