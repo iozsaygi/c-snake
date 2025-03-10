@@ -11,6 +11,21 @@ that is available on the internet, which explains the details of the grid-based 
 There are still QoL improvements that I need to ship, such as a better random number generator and several other minor
 gameplay bugs.
 
+## Changelog
+
+- First update on March 09, 2025. Reworked the color palette to catch a nostalgic feel and added edge wrapping for
+  enhanced gameplay.
+
+<p align="center">
+    <img alt="Gameplay footage" src="https://github.com/iozsaygi/c-snake/blob/main/assets/gameplay-first-update.gif?raw=true">
+</p>
+
+- Initial release on March 02, 2025.
+
+<p align="center">
+    <img alt="Gameplay footage" src="https://github.com/iozsaygi/c-snake/blob/main/assets/gameplay.gif?raw=true">
+</p>
+
 ## Building
 
 ### Windows
@@ -32,21 +47,6 @@ If you wish to play around with several crucial aspects;
    the [game.c](https://github.com/iozsaygi/c-snake/blob/main/src/game.c)
 3. You can also experiment with different grid sizes by
    visiting [grid.h](https://github.com/iozsaygi/c-snake/blob/main/include/grid.h)
-
-## Changelog
-
-- First update on March 09, 2025. Reworked the color palette to catch a nostalgic feel and added edge wrapping for
-  enhanced gameplay.
-
-<p align="center">
-    <img alt="Gameplay footage" src="https://github.com/iozsaygi/c-snake/blob/main/assets/gameplay-first-update.gif?raw=true">
-</p>
-
-- Initial release on March 02, 2025.
-
-<p align="center">
-    <img alt="Gameplay footage" src="https://github.com/iozsaygi/c-snake/blob/main/assets/gameplay.gif?raw=true">
-</p>
 
 ## License
 
