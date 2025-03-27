@@ -13,6 +13,8 @@ gameplay bugs.
 
 ## Changelog
 
+- Minimal update on March 27, 2025. Correcting the usage of `srand` when replacing the food around grid.
+
 - First update on March 09, 2025. Reworked the color palette to catch a nostalgic feel and added edge wrapping for
   enhanced gameplay.
 
