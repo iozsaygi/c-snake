@@ -11,12 +11,12 @@ int Food_Place(struct node* grid, const int* snake) {
     // TODO: Maybe replace 'return' with a log?
     if (availableNodes == NULL) return 0;
 
-    srand(time(NULL));
+    // srand(time(NULL));
 
     const int minimum = 0;
     const int maximum = length;
 
-    const int randomFoodIndex = rand() % (maximum - minimum + 1) + minimum;
+    const int randomFoodIndex = rand() % length;
 
     grid[randomFoodIndex].state = -1;
 

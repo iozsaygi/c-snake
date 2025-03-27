@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <time.h>
 #include "game.h"
 
 int main(int argc, char* argv[]) {
@@ -12,6 +14,9 @@ int main(int argc, char* argv[]) {
         NULL, // renderer
         NULL // window
     };
+
+    // Set the seed now instead of setting it each time before food placement.
+    srand(time(NULL));
 
     if (Game_TryCreate(&wndCtx, &rndCtx) != 0) return -1;
 
