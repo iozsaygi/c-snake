@@ -1,6 +1,7 @@
 #include "snake.h"
 #include <assert.h>
 #include <grid.h>
+#include <stdio.h>
 
 void Snake_Initialize(int* snake) {
     assert(snake != NULL);
@@ -46,6 +47,18 @@ int Snake_FindTailIndex(const int* snake) {
     return tailIndex;
 }
 
+int Snake_GetLength(const int* snake) {
+    assert(snake != NULL);
+
+    int length = 0;
+
+    for (int i = 0; i < GRID_WIDTH * GRID_HEIGHT; i++) {
+        if (snake[i] != 0) length++;
+    }
+
+    return length;
+}
+
 enum collision_state Snake_Update(const enum movement_direction movementDirection, int* snake,
                                   const int lastFoodGridIndex) {
     const int headIndex = Snake_FindHeadIndex(snake);
@@ -79,6 +92,7 @@ enum collision_state Snake_Update(const enum movement_direction movementDirectio
 
     if (newHeadIndex == lastFoodGridIndex) {
         snake[newHeadIndex] = snake[headIndex] + 1;
+        printf("[SNAKE] Collision detected with the food, current snake length is %d\n", Snake_GetLength(snake));
         return CS_FOOD;
     }
 
