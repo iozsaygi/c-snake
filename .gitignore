@@ -56,3 +56,6 @@ dkms.conf
 /cmake-build-debug
 /build
 /dependencies
+
+# macOS related files and folders
+.DS_Store
