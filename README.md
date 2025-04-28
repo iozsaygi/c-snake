@@ -13,7 +13,9 @@ gameplay bugs.
 
 ## Changelog
 
-- macOS-specific update on April 28, 2025. The entire game has been ported to macOS.
+- macOS-specific update on April 28, 2025. The entire game has been ported to
+  macOS. Click [here](https://github.com/iozsaygi/c-snake/commit/f9edf915b0a537853065e19c1cd98fee2cf35cc1) to visit
+  related revision.
 
 - Minimal update on March 27, 2025. Correcting the usage of `srand` when replacing the food around the grid.
 
