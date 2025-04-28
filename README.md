@@ -47,7 +47,7 @@ gameplay bugs.
 
 1. Install CMake via Homebrew `brew install cmake`
 2. `chmod +x .build.sh` on the terminal to give build file required permissions
-3. Run `build.sh`
+3. Run `build.sh` with `./build.sh`
 
 ## Configuring gameplay
 
