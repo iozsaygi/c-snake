@@ -13,6 +13,8 @@ gameplay bugs.
 
 ## Changelog
 
+- macOS-specific update on April 28, 2025. The entire game has been ported to macOS.
+
 - Minimal update on March 27, 2025. Correcting the usage of `srand` when replacing the food around the grid.
 
 - First update on March 09, 2025. Reworked the color palette to catch a nostalgic feel and added edge wrapping for
