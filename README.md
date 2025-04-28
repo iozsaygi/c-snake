@@ -41,6 +41,12 @@ gameplay bugs.
 3. Add `MinGW` to path
 4. Run `win32-build.bat`
 
+### macOS
+
+1. Install CMake via Homebrew `brew install cmake`
+2. `chmod +x .build.sh` on the terminal to give build file required permissions
+3. Run `build.sh`
+
 ## Configuring gameplay
 
 If you wish to play around with several crucial aspects;
