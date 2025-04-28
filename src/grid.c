@@ -21,7 +21,7 @@ void Grid_Initialize(struct node* grid) {
 struct node* Grid_FindAvailableNodes(const struct node* grid, const int* snake, int* length) {
     struct node* result = malloc(sizeof(struct node) * GRID_WIDTH * GRID_HEIGHT);
     if (result == NULL) {
-        printf("Couldn't allocate memory to find available nodes");
+        printf("Couldn't allocate memory to find available nodes\n");
         *length = 0;
         return NULL;
     }
@@ -34,16 +34,14 @@ struct node* Grid_FindAvailableNodes(const struct node* grid, const int* snake, 
         }
     }
 
-    struct node* strictBuffer = (struct node*) realloc(result, internalLength * sizeof(int));
+    struct node* strictBuffer = realloc(result, internalLength * sizeof(struct node));
     if (strictBuffer == NULL) {
-        *length = 0;
         free(result);
+        *length = 0;
         return NULL;
     }
 
-    free(result);
     *length = internalLength;
-
     return strictBuffer;
 }
 
