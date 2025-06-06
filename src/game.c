@@ -51,6 +51,18 @@ void game_tick(tick_context_t* tick_context, const render_context_t* render_cont
                         case SDLK_ESCAPE:
                             tick_context->is_active = GAME_DISABLED_TICK;
                             break;
+                        case SDLK_W:
+                            snake_direction = SNAKE_DIRECTION_NORTH;
+                            break;
+                        case SDLK_A:
+                            snake_direction = SNAKE_DIRECTION_WEST;
+                            break;
+                        case SDLK_S:
+                            snake_direction = SNAKE_DIRECTION_SOUTH;
+                            break;
+                        case SDLK_D:
+                            snake_direction = SNAKE_DIRECTION_EAST;
+                            break;
                         default:
                     }
                 default:
