@@ -1,5 +1,7 @@
 #include "grid.h"
 #include <stdlib.h>
+
+#include "food.h"
 #include "renderer.h"
 #include "snake.h"
 
@@ -103,6 +105,7 @@ void grid_render(const grid_context_t grid_context, const render_context_t* rend
                                                snake_body_color);
                 break;
             case NODE_STATE_FOOD:
+                renderer_renderFullRectangleAt(render_context, grid[i].position, food_size, food_color);
                 break;
             default:
         }

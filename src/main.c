@@ -42,7 +42,7 @@ int main(int argc, const char* argv[]) {
     };
 
     const snake_body_simulation_context_t snake_body_simulation_context = {
-        1000 // simulation_rate
+        300 // simulation_rate
     };
 
     snake_initialize(&snake, snake_spawn_context, grid);

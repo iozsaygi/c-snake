@@ -1,6 +1,8 @@
 #include "game.h"
+
 #include "SDL3/SDL_init.h"
 #include "SDL3/SDL_timer.h"
+#include "food.h"
 
 int game_tryInitialize(const window_context_t window_context, render_context_t* render_context) {
     if (SDL_Init(SDL_INIT_VIDEO) == false) {
@@ -30,7 +32,11 @@ void game_tick(tick_context_t* tick_context, const render_context_t* render_cont
                snake_body_simulation_context_t snake_body_simulation_context, snake_t* snake) {
     SDL_Event event;
 
+    // Setup snake direction.
     snake_direction_t snake_direction = SNAKE_DIRECTION_EAST;
+
+    // Spawn food before entering game loop.
+    food_spawn(grid_context, grid);
 
     const int scalar = 1000;
     const Uint32 frame_delay = scalar / tick_context->target_frame_rate;
@@ -82,11 +88,20 @@ void game_tick(tick_context_t* tick_context, const render_context_t* render_cont
                     grid[snake_simulation_result.desired_node_id].state = NODE_STATE_SNAKE;
                     break;
                 case NODE_STATE_SNAKE:
+                    snake_direction = SNAKE_DIRECTION_EAST;
                     grid_reset(grid_context, grid);
                     snake_free(snake);
                     snake_initialize(&snake, snake_spawn_context, grid);
+                    food_spawn(grid_context, grid);
                     break;
                 case NODE_STATE_FOOD:
+                    grid[snake_simulation_result.desired_node_id].state = NODE_STATE_SNAKE;
+                    struct snake_body_segment* segment =
+                        snake_createBodySegment(snake_simulation_result.desired_node_id);
+                    snake_append(snake, segment);
+                    food_spawn(grid_context, grid);
+
+                    printf("[GAME] Snake ate food, new body length is %d\n", snake->length);
                     break;
             }
         }

@@ -55,7 +55,7 @@ void snake_initialize(snake_t** snake, const snake_spawn_context_t snake_spawn_c
     grid[head->id].state = NODE_STATE_SNAKE;
 }
 
-void snake_append(snake_t* snake, struct snake_body_segment* segment, node_t* grid) {
+void snake_append(snake_t* snake, struct snake_body_segment* segment) {
     snake->head->next = segment;
     segment->next = NULL;
     segment->previous = snake->head;
@@ -111,7 +111,7 @@ snake_simulation_result_t snake_simulate(snake_t* snake, const grid_context_t gr
 
     const int index_prediction = snake_predictNextGridIndexBasedOnDirection(snake, grid_context, snake_direction);
     current_tail->id = index_prediction;
-    snake_append(snake, current_tail, grid);
+    snake_append(snake, current_tail);
     snake_simulation_result.desired_node_id = index_prediction;
 
     return snake_simulation_result;

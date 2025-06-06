@@ -46,7 +46,7 @@ extern const color_t snake_body_color;
 
 struct snake_body_segment* snake_createBodySegment(int id);
 void snake_initialize(snake_t** snake, snake_spawn_context_t snake_spawn_context, node_t* grid);
-void snake_append(snake_t* snake, struct snake_body_segment* segment, node_t* grid);
+void snake_append(snake_t* snake, struct snake_body_segment* segment);
 struct snake_body_segment* snake_removeTail(snake_t* snake, node_t* grid);
 
 int snake_predictNextGridIndexBasedOnDirection(const snake_t* snake, grid_context_t grid_context,
