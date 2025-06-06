@@ -109,6 +109,10 @@ void grid_render(const grid_context_t grid_context, const render_context_t* rend
     }
 }
 
+void grid_reset(const grid_context_t grid_context, node_t* grid) {
+    for (int i = 0; i < grid_context.width * grid_context.height; i++) grid[i].state = NODE_STATE_EMPTY;
+}
+
 node_t* grid_findEmptyNodes(const grid_context_t grid_context, const node_t* grid, int* length) {
     int number_of_empty_nodes = 0;
 

@@ -26,7 +26,8 @@ int game_tryInitialize(const window_context_t window_context, render_context_t* 
 }
 
 void game_tick(tick_context_t* tick_context, const render_context_t* render_context, grid_context_t grid_context,
-               node_t* grid, snake_body_simulation_context_t snake_body_simulation_context, snake_t* snake) {
+               node_t* grid, snake_spawn_context_t snake_spawn_context,
+               snake_body_simulation_context_t snake_body_simulation_context, snake_t* snake) {
     SDL_Event event;
 
     snake_direction_t snake_direction = SNAKE_DIRECTION_EAST;
@@ -70,11 +71,24 @@ void game_tick(tick_context_t* tick_context, const render_context_t* render_cont
         }
 
         if (SDL_GetTicks() - snake_body_last_simulation_registry >= snake_body_simulation_rate) {
-            snake_body_last_simulation_registry = SDL_GetTicks();
             printf("[GAME] Simulating the snake body\n");
+            snake_body_last_simulation_registry = SDL_GetTicks();
 
             const snake_simulation_result_t snake_simulation_result =
                 snake_simulate(snake, grid_context, grid, snake_direction);
+
+            switch (grid[snake_simulation_result.desired_node_id].state) {
+                case NODE_STATE_EMPTY:
+                    grid[snake_simulation_result.desired_node_id].state = NODE_STATE_SNAKE;
+                    break;
+                case NODE_STATE_SNAKE:
+                    grid_reset(grid_context, grid);
+                    snake_free(snake);
+                    snake_initialize(&snake, snake_spawn_context, grid);
+                    break;
+                case NODE_STATE_FOOD:
+                    break;
+            }
         }
 
         // Render scene.

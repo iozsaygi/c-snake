@@ -52,7 +52,8 @@ int main(int argc, const char* argv[]) {
         60 // target_frame_rate
     };
 
-    game_tick(&tick_context, &render_context, grid_context, grid, snake_body_simulation_context, snake);
+    game_tick(&tick_context, &render_context, grid_context, grid, snake_spawn_context, snake_body_simulation_context,
+              snake);
     game_quit(&render_context);
 
     snake_free(snake);
