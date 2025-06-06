@@ -26,6 +26,8 @@ typedef struct {
 
 extern const color_t renderer_background_color;
 
-void renderer_renderRectangleAt(const render_context_t* render_context, point_t at, point_t size, color_t color);
+void renderer_renderFullRectangleAt(const render_context_t* render_context, point_t at, point_t size, color_t color);
+void renderer_renderLineBetween(const render_context_t* render_context, point_t origin, point_t destination,
+                                color_t color);
 
 #endif // RENDERER_H

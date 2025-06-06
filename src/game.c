@@ -24,7 +24,8 @@ int game_tryInitialize(const window_context_t window_context, render_context_t* 
     return 0;
 }
 
-void game_tick(tick_context_t* tick_context, const render_context_t* render_context) {
+void game_tick(tick_context_t* tick_context, const render_context_t* render_context, grid_context_t grid_context,
+               const node_t* grid) {
     SDL_Event event;
 
     while (tick_context->is_active == GAME_ACTIVE_TICK) {
@@ -50,6 +51,8 @@ void game_tick(tick_context_t* tick_context, const render_context_t* render_cont
         SDL_SetRenderDrawColor(render_context->renderer, renderer_background_color.r, renderer_background_color.g,
                                renderer_background_color.b, renderer_background_color.a);
         SDL_RenderClear(render_context->renderer);
+
+        grid_render(grid_context, render_context, grid);
 
         SDL_RenderPresent(render_context->renderer);
     }
