@@ -28,7 +28,7 @@ struct snake_body_segment* snake_createBodySegment(const int id) {
     return segment;
 }
 
-void snake_initialize(snake_t** snake, const snake_spawn_context_t snake_spawn_context) {
+void snake_initialize(snake_t** snake, const snake_spawn_context_t snake_spawn_context, node_t* grid) {
     *snake = (snake_t*) malloc(sizeof(snake_t));
     if (*snake == NULL) {
         printf("[ERROR] Failed to allocate memory for snake\n");
@@ -49,6 +49,10 @@ void snake_initialize(snake_t** snake, const snake_spawn_context_t snake_spawn_c
 
     (*snake)->head = head;
     (*snake)->length = snake_spawn_context.initial_length;
+
+    grid[(*snake)->tail->id].state = NODE_STATE_SNAKE;
+    grid[center->id].state = NODE_STATE_SNAKE;
+    grid[head->id].state = NODE_STATE_SNAKE;
 }
 
 void snake_append(snake_t* snake, struct snake_body_segment* segment) {
@@ -59,16 +63,27 @@ void snake_append(snake_t* snake, struct snake_body_segment* segment) {
     snake->length++;
 }
 
-void snake_render(const render_context_t* render_context, const snake_t* snake, const node_t* grid) {
-    const struct snake_body_segment* current = snake->tail;
+struct snake_body_segment* snake_removeTail(snake_t* snake, node_t* grid) {
+    struct snake_body_segment* current_tail = snake->tail;
 
-    while (current != NULL) {
-        const node_t node = grid[current->id];
-        renderer_renderFullRectangleAt(render_context, node.position, snake_body_segment_size, snake_body_color);
+    snake->tail = current_tail->next;
+    snake->tail->previous = NULL;
 
-        current = current->next;
-    }
+    grid[current_tail->id].state = NODE_STATE_EMPTY;
+
+    return current_tail;
 }
+
+// void snake_render(const render_context_t* render_context, const snake_t* snake, const node_t* grid) {
+//     const struct snake_body_segment* current = snake->tail;
+//
+//     while (current != NULL) {
+//         const node_t node = grid[current->id];
+//         renderer_renderFullRectangleAt(render_context, node.position, snake_body_segment_size, snake_body_color);
+//
+//         current = current->next;
+//     }
+// }
 
 void snake_free(snake_t* snake) {
     struct snake_body_segment* current = snake->tail;

@@ -67,7 +67,6 @@ void game_tick(tick_context_t* tick_context, const render_context_t* render_cont
         SDL_RenderClear(render_context->renderer);
 
         grid_render(grid_context, render_context, grid);
-        snake_render(render_context, snake, grid);
 
         SDL_RenderPresent(render_context->renderer);
 

@@ -33,9 +33,13 @@ extern const point_t snake_body_segment_size;
 extern const color_t snake_body_color;
 
 struct snake_body_segment* snake_createBodySegment(int id);
-void snake_initialize(snake_t** snake, snake_spawn_context_t snake_spawn_context);
+void snake_initialize(snake_t** snake, snake_spawn_context_t snake_spawn_context, node_t* grid);
 void snake_append(snake_t* snake, struct snake_body_segment* segment);
-void snake_render(const render_context_t* render_context, const snake_t* snake, const node_t* grid);
+struct snake_body_segment* snake_removeTail(snake_t* snake, node_t* grid);
+
+// Rendering based on node states instead, still keeping this for other cases.
+// void snake_render(const render_context_t* render_context, const snake_t* snake, const node_t* grid);
+
 void snake_free(snake_t* snake);
 
 #endif // SNAKE_H

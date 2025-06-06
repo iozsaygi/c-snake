@@ -41,7 +41,7 @@ int main(int argc, const char* argv[]) {
         1000 // simulation_rate
     };
 
-    snake_initialize(&snake, snake_spawn_context);
+    snake_initialize(&snake, snake_spawn_context, grid);
 
     tick_context_t tick_context = {
         GAME_ACTIVE_TICK, // is_active

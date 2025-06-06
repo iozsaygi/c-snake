@@ -1,6 +1,7 @@
 #include "grid.h"
 #include <stdlib.h>
 #include "renderer.h"
+#include "snake.h"
 
 const color_t grid_color = {
     255, // r
@@ -91,6 +92,19 @@ void grid_render(const grid_context_t grid_context, const render_context_t* rend
             };
 
             renderer_renderLineBetween(render_context, origin, destination, grid_color);
+        }
+
+        // Rendering based on grid state.
+        switch (grid[i].state) {
+            case NODE_STATE_EMPTY:
+                break;
+            case NODE_STATE_SNAKE:
+                renderer_renderFullRectangleAt(render_context, grid[i].position, snake_body_segment_size,
+                                               snake_body_color);
+                break;
+            case NODE_STATE_FOOD:
+                break;
+            default:
         }
     }
 }
