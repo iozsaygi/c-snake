@@ -55,12 +55,14 @@ void snake_initialize(snake_t** snake, const snake_spawn_context_t snake_spawn_c
     grid[head->id].state = NODE_STATE_SNAKE;
 }
 
-void snake_append(snake_t* snake, struct snake_body_segment* segment) {
+void snake_append(snake_t* snake, struct snake_body_segment* segment, node_t* grid) {
     snake->head->next = segment;
     segment->next = NULL;
     segment->previous = snake->head;
     snake->head = segment;
     snake->length++;
+
+    grid[segment->id].state = NODE_STATE_SNAKE;
 }
 
 struct snake_body_segment* snake_removeTail(snake_t* snake, node_t* grid) {
@@ -72,6 +74,12 @@ struct snake_body_segment* snake_removeTail(snake_t* snake, node_t* grid) {
     grid[current_tail->id].state = NODE_STATE_EMPTY;
 
     return current_tail;
+}
+
+void snake_simulate(snake_t* snake, node_t* grid, snake_direction_t snake_direction) {
+    struct snake_body_segment* current_tail = snake_removeTail(snake, grid);
+    current_tail->id = snake->head->id + 1;
+    snake_append(snake, current_tail, grid);
 }
 
 // void snake_render(const render_context_t* render_context, const snake_t* snake, const node_t* grid) {

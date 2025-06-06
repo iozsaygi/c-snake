@@ -26,9 +26,10 @@ int game_tryInitialize(const window_context_t window_context, render_context_t* 
 }
 
 void game_tick(tick_context_t* tick_context, const render_context_t* render_context, grid_context_t grid_context,
-               const node_t* grid, snake_body_simulation_context_t snake_body_simulation_context,
-               const snake_t* snake) {
+               node_t* grid, snake_body_simulation_context_t snake_body_simulation_context, snake_t* snake) {
     SDL_Event event;
+
+    snake_direction_t snake_direction = SNAKE_DIRECTION_EAST;
 
     const int scalar = 1000;
     const Uint32 frame_delay = scalar / tick_context->target_frame_rate;
@@ -59,6 +60,8 @@ void game_tick(tick_context_t* tick_context, const render_context_t* render_cont
         if (SDL_GetTicks() - snake_body_last_simulation_registry >= snake_body_simulation_rate) {
             snake_body_last_simulation_registry = SDL_GetTicks();
             printf("[GAME] Simulating the snake body\n");
+
+            snake_simulate(snake, grid, snake_direction);
         }
 
         // Render scene.

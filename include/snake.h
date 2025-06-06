@@ -29,13 +29,22 @@ typedef struct {
     int simulation_rate;
 } snake_body_simulation_context_t;
 
+typedef enum {
+    SNAKE_DIRECTION_NORTH,
+    SNAKE_DIRECTION_WEST,
+    SNAKE_DIRECTION_SOUTH,
+    SNAKE_DIRECTION_EAST,
+} snake_direction_t;
+
 extern const point_t snake_body_segment_size;
 extern const color_t snake_body_color;
 
 struct snake_body_segment* snake_createBodySegment(int id);
 void snake_initialize(snake_t** snake, snake_spawn_context_t snake_spawn_context, node_t* grid);
-void snake_append(snake_t* snake, struct snake_body_segment* segment);
+void snake_append(snake_t* snake, struct snake_body_segment* segment, node_t* grid);
 struct snake_body_segment* snake_removeTail(snake_t* snake, node_t* grid);
+
+void snake_simulate(snake_t* snake, node_t* grid, snake_direction_t snake_direction);
 
 // Rendering based on node states instead, still keeping this for other cases.
 // void snake_render(const render_context_t* render_context, const snake_t* snake, const node_t* grid);
