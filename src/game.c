@@ -1,5 +1,6 @@
 #include "game.h"
 #include "SDL3/SDL_init.h"
+#include "SDL3/SDL_timer.h"
 
 int game_tryInitialize(const window_context_t window_context, render_context_t* render_context) {
     if (SDL_Init(SDL_INIT_VIDEO) == false) {
@@ -28,7 +29,11 @@ void game_tick(tick_context_t* tick_context, const render_context_t* render_cont
                const node_t* grid) {
     SDL_Event event;
 
+    const int scalar = 1000;
+    const Uint32 frame_delay = scalar / tick_context->target_frame_rate;
+
     while (tick_context->is_active == GAME_ACTIVE_TICK) {
+        Uint32 frame_start = SDL_GetTicks();
 
         // Event handling.
         while (SDL_PollEvent(&event)) {
@@ -55,6 +60,11 @@ void game_tick(tick_context_t* tick_context, const render_context_t* render_cont
         grid_render(grid_context, render_context, grid);
 
         SDL_RenderPresent(render_context->renderer);
+
+        const Uint32 current_frame_time = SDL_GetTicks() - frame_start;
+        if (frame_delay > current_frame_time) {
+            SDL_Delay(frame_delay - current_frame_time);
+        }
     }
 }
 

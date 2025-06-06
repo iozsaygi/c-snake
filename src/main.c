@@ -31,7 +31,7 @@ int main(int argc, const char* argv[]) {
 
     tick_context_t tick_context = {
         GAME_ACTIVE_TICK, // is_active
-        30 // target_frame_rate
+        60 // target_frame_rate
     };
 
     game_tick(&tick_context, &render_context, grid_context, grid);
