@@ -25,6 +25,10 @@ typedef struct {
     int initial_length;
 } snake_spawn_context_t;
 
+typedef struct {
+    int simulation_rate;
+} snake_body_simulation_context_t;
+
 extern const point_t snake_body_segment_size;
 extern const color_t snake_body_color;
 

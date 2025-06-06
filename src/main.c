@@ -37,6 +37,10 @@ int main(int argc, const char* argv[]) {
         3 // initial_length
     };
 
+    const snake_body_simulation_context_t snake_body_simulation_context = {
+        1000 // simulation_rate
+    };
+
     snake_initialize(&snake, snake_spawn_context);
 
     tick_context_t tick_context = {
@@ -44,7 +48,7 @@ int main(int argc, const char* argv[]) {
         60 // target_frame_rate
     };
 
-    game_tick(&tick_context, &render_context, grid_context, grid, snake);
+    game_tick(&tick_context, &render_context, grid_context, grid, snake_body_simulation_context, snake);
     game_quit(&render_context);
 
     return 0;
