@@ -1,9 +1,13 @@
+#include <stdlib.h>
 #include "game.h"
 #include "grid.h"
 #include "renderer.h"
 
 int main(int argc, const char* argv[]) {
     printf("[MAIN] CSnake Main\n");
+
+    // Preparing for random generation.
+    srand(time(NULL)); // NOLINT(*-msc51-cpp)
 
     const window_context_t window_context = {
         640, // width
