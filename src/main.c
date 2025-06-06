@@ -51,5 +51,7 @@ int main(int argc, const char* argv[]) {
     game_tick(&tick_context, &render_context, grid_context, grid, snake_body_simulation_context, snake);
     game_quit(&render_context);
 
+    snake_free(snake);
+
     return 0;
 }

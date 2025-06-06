@@ -44,7 +44,9 @@ void snake_initialize(snake_t** snake, snake_spawn_context_t snake_spawn_context
 void snake_append(snake_t* snake, struct snake_body_segment* segment, node_t* grid);
 struct snake_body_segment* snake_removeTail(snake_t* snake, node_t* grid);
 
-void snake_simulate(snake_t* snake, node_t* grid, snake_direction_t snake_direction);
+int snake_predictNextGridIndexBasedOnDirection(const snake_t* snake, grid_context_t grid_context,
+                                               snake_direction_t direction);
+void snake_simulate(snake_t* snake, grid_context_t grid_context, node_t* grid, snake_direction_t snake_direction);
 
 // Rendering based on node states instead, still keeping this for other cases.
 // void snake_render(const render_context_t* render_context, const snake_t* snake, const node_t* grid);

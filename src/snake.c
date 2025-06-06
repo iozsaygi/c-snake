@@ -76,9 +76,36 @@ struct snake_body_segment* snake_removeTail(snake_t* snake, node_t* grid) {
     return current_tail;
 }
 
-void snake_simulate(snake_t* snake, node_t* grid, snake_direction_t snake_direction) {
+int snake_predictNextGridIndexBasedOnDirection(const snake_t* snake, const grid_context_t grid_context,
+                                               const snake_direction_t direction) {
+    const int head_id = snake->head->id;
+    int x = head_id % grid_context.width;
+    int y = head_id / grid_context.width;
+
+    switch (direction) {
+        case SNAKE_DIRECTION_NORTH:
+            y = (y - 1 + grid_context.height) % grid_context.height;
+            break;
+        case SNAKE_DIRECTION_SOUTH:
+            y = (y + 1) % grid_context.height;
+            break;
+        case SNAKE_DIRECTION_WEST:
+            x = (x - 1 + grid_context.width) % grid_context.width;
+            break;
+        case SNAKE_DIRECTION_EAST:
+            x = (x + 1) % grid_context.width;
+            break;
+    }
+
+    return y * grid_context.width + x;
+}
+
+
+void snake_simulate(snake_t* snake, const grid_context_t grid_context, node_t* grid,
+                    const snake_direction_t snake_direction) {
     struct snake_body_segment* current_tail = snake_removeTail(snake, grid);
-    current_tail->id = snake->head->id + 1;
+    const int index_prediction = snake_predictNextGridIndexBasedOnDirection(snake, grid_context, snake_direction);
+    current_tail->id = index_prediction;
     snake_append(snake, current_tail, grid);
 }
 
