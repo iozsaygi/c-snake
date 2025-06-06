@@ -8,6 +8,7 @@
 
 typedef struct {
     int is_active;
+    int target_frame_rate;
 } tick_context_t;
 
 // Will return '0' on success.

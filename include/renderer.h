@@ -9,7 +9,6 @@
 typedef struct {
     int width;
     int height;
-    int target_frame_rate;
     const char* title;
 } window_context_t;
 
