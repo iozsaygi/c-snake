@@ -1,7 +1,7 @@
 #include "renderer.h"
 
 void renderer_renderRectangleAt(const render_context_t* render_context, const point_t at, const point_t size,
-                                color_t color) {
+                                const color_t color) {
     SDL_FRect render_rectangle;
 
     render_rectangle.x = at.x;
