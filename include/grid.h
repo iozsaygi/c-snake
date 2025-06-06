@@ -23,4 +23,6 @@ extern const color_t grid_color;
 void grid_create(grid_context_t grid_context, node_t* grid);
 void grid_render(grid_context_t grid_context, const render_context_t* render_context, const node_t* grid);
 
+node_t* grid_findEmptyNodes(grid_context_t grid_context, const node_t* grid, int* length);
+
 #endif // GRID_H

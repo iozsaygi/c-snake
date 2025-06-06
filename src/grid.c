@@ -1,4 +1,5 @@
 #include "grid.h"
+#include <stdlib.h>
 #include "renderer.h"
 
 const color_t grid_color = {
@@ -92,4 +93,28 @@ void grid_render(const grid_context_t grid_context, const render_context_t* rend
             renderer_renderLineBetween(render_context, origin, destination, grid_color);
         }
     }
+}
+
+node_t* grid_findEmptyNodes(const grid_context_t grid_context, const node_t* grid, int* length) {
+    int number_of_empty_nodes = 0;
+
+    for (int i = 0; i < grid_context.width * grid_context.height; i++) {
+        if (grid[i].state == NODE_STATE_EMPTY) number_of_empty_nodes++;
+    }
+
+    node_t* empty_nodes = (node_t*) malloc(sizeof(node_t) * number_of_empty_nodes);
+    if (empty_nodes == NULL) {
+        printf("[ERROR] Failed to allocate memory to find empty nodes within the grid\n");
+        return NULL;
+    }
+
+    int index = 0;
+    for (int i = 0; i < grid_context.width * grid_context.height; i++) {
+        if (grid[i].state == NODE_STATE_EMPTY) {
+            empty_nodes[index++] = grid[i];
+        }
+    }
+
+    *length = number_of_empty_nodes;
+    return empty_nodes;
 }
