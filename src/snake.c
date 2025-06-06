@@ -7,9 +7,9 @@ const point_t snake_body_segment_size = {
 };
 
 const color_t snake_body_color = {
-    255, // r
-    255, // g
-    255, // b
+    60, // r
+    60, // g
+    60, // b
     255 // a
 };
 
