@@ -17,8 +17,8 @@ void grid_create(const grid_context_t grid_context, node_t* grid) {
             grid[index].id = index;
 
             const point_t position = {
-                i * grid_context.node_scale, // x
-                j * grid_context.node_scale // y
+                (float) i * grid_context.node_scale, // x
+                (float) j * grid_context.node_scale // y
             };
 
             grid[index].position = position;

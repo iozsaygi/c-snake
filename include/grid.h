@@ -15,7 +15,7 @@ typedef struct {
 typedef struct {
     int width;
     int height;
-    int node_scale;
+    float node_scale;
 } grid_context_t;
 
 extern const color_t grid_color;
