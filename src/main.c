@@ -29,12 +29,22 @@ int main(int argc, const char* argv[]) {
 
     grid_create(grid_context, grid);
 
+    snake_t* snake = NULL;
+    const snake_spawn_context_t snake_spawn_context = {
+        230, // first_spawn_id
+        231, // second_spawn_id
+        232, // third_spawn_id
+        3 // initial_length
+    };
+
+    snake_initialize(&snake, snake_spawn_context);
+
     tick_context_t tick_context = {
         GAME_ACTIVE_TICK, // is_active
         60 // target_frame_rate
     };
 
-    game_tick(&tick_context, &render_context, grid_context, grid);
+    game_tick(&tick_context, &render_context, grid_context, grid, snake);
     game_quit(&render_context);
 
     return 0;

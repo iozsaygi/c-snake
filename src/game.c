@@ -26,7 +26,7 @@ int game_tryInitialize(const window_context_t window_context, render_context_t* 
 }
 
 void game_tick(tick_context_t* tick_context, const render_context_t* render_context, grid_context_t grid_context,
-               const node_t* grid) {
+               const node_t* grid, snake_t* snake) {
     SDL_Event event;
 
     const int scalar = 1000;
@@ -58,6 +58,7 @@ void game_tick(tick_context_t* tick_context, const render_context_t* render_cont
         SDL_RenderClear(render_context->renderer);
 
         grid_render(grid_context, render_context, grid);
+        snake_render(render_context, snake, grid);
 
         SDL_RenderPresent(render_context->renderer);
 
