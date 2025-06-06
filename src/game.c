@@ -73,7 +73,8 @@ void game_tick(tick_context_t* tick_context, const render_context_t* render_cont
             snake_body_last_simulation_registry = SDL_GetTicks();
             printf("[GAME] Simulating the snake body\n");
 
-            snake_simulate(snake, grid_context, grid, snake_direction);
+            const snake_simulation_result_t snake_simulation_result =
+                snake_simulate(snake, grid_context, grid, snake_direction);
         }
 
         // Render scene.

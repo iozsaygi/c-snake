@@ -101,12 +101,19 @@ int snake_predictNextGridIndexBasedOnDirection(const snake_t* snake, const grid_
 }
 
 
-void snake_simulate(snake_t* snake, const grid_context_t grid_context, node_t* grid,
-                    const snake_direction_t snake_direction) {
+snake_simulation_result_t snake_simulate(snake_t* snake, const grid_context_t grid_context, node_t* grid,
+                                         const snake_direction_t snake_direction) {
+    snake_simulation_result_t snake_simulation_result;
+
     struct snake_body_segment* current_tail = snake_removeTail(snake, grid);
+    snake_simulation_result.removed_node_id = current_tail->id;
+
     const int index_prediction = snake_predictNextGridIndexBasedOnDirection(snake, grid_context, snake_direction);
     current_tail->id = index_prediction;
     snake_append(snake, current_tail, grid);
+    snake_simulation_result.registered_node_id = index_prediction;
+
+    return snake_simulation_result;
 }
 
 // void snake_render(const render_context_t* render_context, const snake_t* snake, const node_t* grid) {
