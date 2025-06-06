@@ -25,6 +25,8 @@ typedef struct {
     int a;
 } color_t;
 
+extern const color_t renderer_background_color;
+
 void renderer_renderRectangleAt(const render_context_t* render_context, point_t at, point_t size, color_t color);
 
 #endif // RENDERER_H

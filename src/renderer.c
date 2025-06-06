@@ -1,5 +1,12 @@
 #include "renderer.h"
 
+const color_t renderer_background_color = {
+    149, // r
+    194, // g
+    107, // b
+    255 // a
+};
+
 void renderer_renderRectangleAt(const render_context_t* render_context, const point_t at, const point_t size,
                                 const color_t color) {
     SDL_FRect render_rectangle;
