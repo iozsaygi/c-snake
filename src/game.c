@@ -77,7 +77,7 @@ void game_tick(tick_context_t* tick_context, const render_context_t* render_cont
         }
 
         if (SDL_GetTicks() - snake_body_last_simulation_registry >= snake_body_simulation_rate) {
-            printf("[GAME] Simulating the snake body\n");
+            // printf("[GAME] Simulating the snake body\n");
             snake_body_last_simulation_registry = SDL_GetTicks();
 
             const snake_simulation_result_t snake_simulation_result =
@@ -100,6 +100,8 @@ void game_tick(tick_context_t* tick_context, const render_context_t* render_cont
                         snake_createBodySegment(snake_simulation_result.desired_node_id);
                     snake_append(snake, segment);
                     food_spawn(grid_context, grid);
+
+                    snake->length++;
 
                     printf("[GAME] Snake ate food, new body length is %d\n", snake->length);
                     break;

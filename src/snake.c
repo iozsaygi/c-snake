@@ -60,7 +60,9 @@ void snake_append(snake_t* snake, struct snake_body_segment* segment) {
     segment->next = NULL;
     segment->previous = snake->head;
     snake->head = segment;
-    snake->length++;
+
+    // This leads to incorrect length counts when 'snake_append' is called for normal movement.
+    // snake->length++;
 
     // We'll handle this within main game loop.
     // grid[segment->id].state = NODE_STATE_SNAKE;

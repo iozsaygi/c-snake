@@ -13,6 +13,8 @@ gameplay bugs.
 
 ## Changelog
 
+- Reworked the entire code base and fixed several bugs.
+
 - macOS-specific update on April 28, 2025. The entire game has been ported to
   macOS. Click [here](https://github.com/iozsaygi/c-snake/commit/f9edf915b0a537853065e19c1cd98fee2cf35cc1) to visit
   related revision.
