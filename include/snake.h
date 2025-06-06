@@ -31,7 +31,7 @@ typedef struct {
 
 typedef struct {
     int removed_node_id;
-    int registered_node_id;
+    int desired_node_id;
 } snake_simulation_result_t;
 
 typedef enum {

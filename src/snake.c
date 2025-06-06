@@ -62,7 +62,8 @@ void snake_append(snake_t* snake, struct snake_body_segment* segment, node_t* gr
     snake->head = segment;
     snake->length++;
 
-    grid[segment->id].state = NODE_STATE_SNAKE;
+    // We'll handle this within main game loop.
+    // grid[segment->id].state = NODE_STATE_SNAKE;
 }
 
 struct snake_body_segment* snake_removeTail(snake_t* snake, node_t* grid) {
@@ -111,7 +112,7 @@ snake_simulation_result_t snake_simulate(snake_t* snake, const grid_context_t gr
     const int index_prediction = snake_predictNextGridIndexBasedOnDirection(snake, grid_context, snake_direction);
     current_tail->id = index_prediction;
     snake_append(snake, current_tail, grid);
-    snake_simulation_result.registered_node_id = index_prediction;
+    snake_simulation_result.desired_node_id = index_prediction;
 
     return snake_simulation_result;
 }
