@@ -107,14 +107,20 @@ int snake_predictNextGridIndexBasedOnDirection(const snake_t* snake, const grid_
 snake_simulation_result_t snake_simulate(snake_t* snake, const grid_context_t grid_context, node_t* grid,
                                          const snake_direction_t snake_direction) {
     snake_simulation_result_t snake_simulation_result;
-
-    struct snake_body_segment* current_tail = snake_removeTail(snake, grid);
-    snake_simulation_result.removed_node_id = current_tail->id;
-
     const int index_prediction = snake_predictNextGridIndexBasedOnDirection(snake, grid_context, snake_direction);
-    current_tail->id = index_prediction;
-    snake_append(snake, current_tail);
     snake_simulation_result.desired_node_id = index_prediction;
+
+    if (grid[index_prediction].state == NODE_STATE_EMPTY) {
+        // Regular move, we can remove the tail and append it to the head.
+        struct snake_body_segment* current_tail = snake_removeTail(snake, grid);
+        snake_simulation_result.removed_node_id = current_tail->id;
+
+        current_tail->id = index_prediction;
+        snake_append(snake, current_tail);
+    } else {
+        // Setting to invalid ID because we didn't actually remove any nodes.
+        snake_simulation_result.removed_node_id = GRID_INVALID_NODE_ID;
+    }
 
     return snake_simulation_result;
 }

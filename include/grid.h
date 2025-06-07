@@ -4,6 +4,8 @@
 #include "point.h"
 #include "renderer.h"
 
+#define GRID_INVALID_NODE_ID -1
+
 typedef enum { NODE_STATE_EMPTY, NODE_STATE_SNAKE, NODE_STATE_FOOD } node_state_t;
 
 typedef struct {
