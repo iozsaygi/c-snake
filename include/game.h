@@ -17,7 +17,7 @@ typedef struct {
 int game_tryInitialize(window_context_t window_context, render_context_t* render_context);
 void game_tick(tick_context_t* tick_context, const render_context_t* render_context, grid_context_t grid_context,
                node_t* grid, snake_spawn_context_t snake_spawn_context,
-               snake_body_simulation_context_t snake_body_simulation_context, snake_t* snake);
+               snake_body_simulation_context_t snake_body_simulation_context, snake_t** snake);
 void game_quit(render_context_t* render_context);
 
 #endif // GAME_H

@@ -29,7 +29,7 @@ int game_tryInitialize(const window_context_t window_context, render_context_t* 
 
 void game_tick(tick_context_t* tick_context, const render_context_t* render_context, grid_context_t grid_context,
                node_t* grid, snake_spawn_context_t snake_spawn_context,
-               snake_body_simulation_context_t snake_body_simulation_context, snake_t* snake) {
+               snake_body_simulation_context_t snake_body_simulation_context, snake_t** snake) {
     SDL_Event event;
 
     // Setup snake direction.
@@ -81,7 +81,7 @@ void game_tick(tick_context_t* tick_context, const render_context_t* render_cont
             snake_body_last_simulation_registry = SDL_GetTicks();
 
             const snake_simulation_result_t snake_simulation_result =
-                snake_simulate(snake, grid_context, grid, snake_direction);
+                snake_simulate(*snake, grid_context, grid, snake_direction);
 
             switch (grid[snake_simulation_result.desired_node_id].state) {
                 case NODE_STATE_EMPTY:
@@ -90,20 +90,20 @@ void game_tick(tick_context_t* tick_context, const render_context_t* render_cont
                 case NODE_STATE_SNAKE:
                     snake_direction = SNAKE_DIRECTION_EAST;
                     grid_reset(grid_context, grid);
-                    snake_free(snake);
-                    snake_initialize(&snake, snake_spawn_context, grid);
+                    snake_free(*snake);
+                    snake_initialize(snake, snake_spawn_context, grid);
                     food_spawn(grid_context, grid);
                     break;
                 case NODE_STATE_FOOD:
                     grid[snake_simulation_result.desired_node_id].state = NODE_STATE_SNAKE;
                     struct snake_body_segment* segment =
                         snake_createBodySegment(snake_simulation_result.desired_node_id);
-                    snake_append(snake, segment);
+                    snake_append(*snake, segment);
                     food_spawn(grid_context, grid);
 
-                    snake->length++;
+                    (*snake)->length++;
 
-                    printf("[GAME] Snake ate food, new body length is %d\n", snake->length);
+                    printf("[GAME] Snake ate food, new body length is %d\n", (*snake)->length);
                     break;
             }
         }
