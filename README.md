@@ -11,25 +11,6 @@ that is available on the internet, which explains the details of the grid-based 
 There are still QoL improvements that I need to ship, such as a better random number generator and several other minor
 gameplay bugs.
 
-## Changelog
-
-- Stability update on June 06, 2025. Re-engineered the entire code base and fixed crucial gameplay bugs.
-
-- macOS-specific update on April 28, 2025. The entire game has been ported to
-  macOS. Click [here](https://github.com/iozsaygi/c-snake/commit/f9edf915b0a537853065e19c1cd98fee2cf35cc1) to visit
-  related revision.
-
-- Minimal update on March 27, 2025. Correcting the usage of `srand` when replacing the food around the grid.
-
-- First update on March 09, 2025. Reworked the color palette to catch a nostalgic feel and added edge wrapping for
-  enhanced gameplay.
-
-<p align="center">
-    <img alt="Gameplay footage" src="https://github.com/iozsaygi/c-snake/blob/main/assets/gameplay-first-update.gif?raw=true">
-</p>
-
-- Initial release on March 02, 2025.
-
 <p align="center">
     <img alt="Gameplay footage" src="https://github.com/iozsaygi/c-snake/blob/main/assets/gameplay.gif?raw=true">
 </p>
