@@ -12,7 +12,7 @@ There are still QoL improvements that I need to ship, such as a better random nu
 gameplay bugs.
 
 <p align="center">
-    <img alt="Gameplay footage" src="https://github.com/iozsaygi/c-snake/blob/main/assets/gameplay.gif?raw=true">
+    <img alt="Gameplay footage" src="https://github.com/iozsaygi/c-snake/blob/main/assets/gameplay-first-update.gif?raw=true">
 </p>
 
 ## Building
