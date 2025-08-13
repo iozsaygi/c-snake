@@ -38,7 +38,7 @@ If you wish to play around with several crucial aspects;
 
 1. You can update the simulation speed however you want;
    visit [game.c](https://github.com/iozsaygi/c-snake/blob/main/src/game.c) and play around with `simulationRate`
-2. Current keybindings are W, A, S, and D, but you can modify it however you like. Refer to
+2. Current keybindings are W, A, S, and D, but you can modify it however you like, refer to
    the [game.c](https://github.com/iozsaygi/c-snake/blob/main/src/game.c)
 3. You can also experiment with different grid sizes by
    visiting [grid.h](https://github.com/iozsaygi/c-snake/blob/main/include/grid.h)
